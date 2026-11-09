@@ -1,517 +1,1657 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <!-- Always force latest IE rendering engine or request Chrome Frame -->
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions | XAMPP for Windows</title>
+    <link rel="icon" type="image/png" href="/dashboard/images/favicon.png">
 
-    <!-- Use title if it's in the page YAML frontmatter -->
-    <title>XAMPP FAQs for Windows</title>
+    <style>
+        :root {
+            --bg-base: #f8fafc;
+            --bg-surface: #ffffff;
+            --bg-subtle: #f1f5f9;
+            --bg-hover: #e2e8f0;
+            --border-color: #e2e8f0;
+            --border-subtle: #cbd5e1;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --primary: #fb6a00; /* XAMPP Orange */
+            --primary-hover: #e05e00;
+            --primary-subtle: #fff7ed;
+            --primary-text: #c2410c;
+            --accent-blue: #4f46e5;
+            --accent-blue-subtle: #e0e7ff;
+            --accent-blue-text: #3730a3;
+            --success-bg: #dcfce7;
+            --success-text: #15803d;
+            --danger-bg: #fee2e2;
+            --danger-text: #b91c1c;
+            --header-h: 70px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
 
-    <meta name="description" content="Instructions on how to install XAMPP for Windows distributions." />
-    
+        [data-theme="dark"] {
+            --bg-base: #0b0f19;
+            --bg-surface: #131b2e;
+            --bg-subtle: #1e293b;
+            --bg-hover: #2d3b55;
+            --border-color: #243049;
+            --border-subtle: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --primary: #fb923c;
+            --primary-hover: #f97316;
+            --primary-subtle: #431407;
+            --primary-text: #fdba74;
+            --accent-blue: #818cf8;
+            --accent-blue-subtle: #232742;
+            --accent-blue-text: #c7d2fe;
+            --success-bg: #064e3b;
+            --success-text: #a7f3d0;
+            --danger-bg: #7f1d1d;
+            --danger-text: #fecaca;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6);
+        }
 
-    <link href="/dashboard/stylesheets/normalize.css" rel="stylesheet" type="text/css" /><link href="/dashboard/stylesheets/all.css" rel="stylesheet" type="text/css" />
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    <script src="/dashboard/javascripts/modernizr.js" type="text/javascript"></script>
+        html {
+            scroll-behavior: smooth;
+        }
 
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-top: var(--header-h);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-    <link href="/dashboard/images/favicon.png" rel="icon" type="image/png" />
+        /* Top Navigation Header */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-h);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            box-shadow: var(--shadow-sm);
+        }
 
+        [data-theme="dark"] .navbar {
+            background: rgba(19, 27, 46, 0.85);
+        }
 
-  </head>
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
 
-  <body class="faq">
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=277385395761685";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    <header class="header contain-to-grid">
-      <nav class="top-bar" data-topbar>
-        <ul class="title-area">
-          <li class="name">
-            <h1><a href="/dashboard/index.html">Apache Friends</a></h1>
-          </li>
-          <li class="toggle-topbar menu-icon">
-            <a href="#">
-              <span>Menu</span>
+        .navbar-brand img {
+            width: 36px;
+            height: 36px;
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-title span {
+            color: var(--primary);
+        }
+
+        .brand-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 9999px;
+            background: var(--bg-subtle);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.5rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+            background: var(--bg-subtle);
+        }
+
+        .nav-item.active {
+            color: var(--primary-text);
+            background: var(--primary-subtle);
+        }
+
+        .nav-item-highlight {
+            background: var(--primary);
+            color: #ffffff !important;
+            box-shadow: 0 2px 4px rgba(251, 106, 0, 0.25);
+        }
+
+        .nav-item-highlight:hover {
+            background: var(--primary-hover) !important;
+            transform: translateY(-1px);
+        }
+
+        .badge-app {
+            font-size: 0.7rem;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.1rem 0.4rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .theme-toggle-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            width: 38px;
+            height: 38px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--text-primary);
+            border-color: var(--primary);
+            transform: rotate(15deg);
+        }
+
+        .theme-toggle-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 5rem 1.5rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* Hero Header */
+        .hero-banner {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem 2.25rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #fb6a00, #f59e0b, #4f46e5);
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            background: var(--primary-subtle);
+            color: var(--primary-text);
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.85rem;
+        }
+
+        .hero-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 1.75rem;
+        }
+
+        /* Search Bar */
+        .search-wrapper {
+            position: relative;
+            max-width: 650px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 2.75rem 0.75rem 2.75rem;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            background: var(--bg-surface);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(251, 106, 0, 0.15);
+        }
+
+        .search-shortcut {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.15rem 0.45rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            pointer-events: none;
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+            display: none;
+        }
+
+        .search-clear:hover {
+            color: var(--text-primary);
+        }
+
+        /* Category Filter Pills */
+        .category-filter-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-pills {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: thin;
+        }
+
+        .filter-pill {
+            padding: 0.45rem 1rem;
+            border-radius: 9999px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .filter-pill:hover, .filter-pill.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .accordion-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-toggle-all {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.4rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-toggle-all:hover {
+            color: var(--text-primary);
+            border-color: var(--border-subtle);
+            background: var(--bg-subtle);
+        }
+
+        /* Category Sections */
+        .category-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .category-heading {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: -0.02em;
+        }
+
+        .category-icon {
+            font-size: 1.25rem;
+        }
+
+        .category-count {
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: var(--bg-subtle);
+            color: var(--text-muted);
+            padding: 0.15rem 0.55rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Accordion Cards */
+        .faq-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .faq-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+
+        .faq-card:hover {
+            border-color: var(--border-subtle);
+        }
+
+        .faq-card.open {
+            border-color: rgba(251, 106, 0, 0.4);
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-header {
+            padding: 1.15rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+            background: var(--bg-surface);
+            transition: background 0.15s ease;
+        }
+
+        .faq-header:hover {
+            background: var(--bg-subtle);
+        }
+
+        .faq-card.open .faq-header {
+            background: var(--bg-subtle);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .faq-title-area {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            flex: 1;
+        }
+
+        .faq-question {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .faq-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.15rem 0.5rem;
+            border-radius: 6px;
+            background: var(--bg-subtle);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+
+        .faq-chevron {
+            width: 20px;
+            height: 20px;
+            color: var(--text-muted);
+            transition: transform 0.25s ease;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .faq-card.open .faq-chevron {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
+
+        .faq-body {
+            padding: 1.5rem;
+            font-size: 0.925rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            display: none;
+        }
+
+        .faq-card.open .faq-body {
+            display: block;
+        }
+
+        .faq-body p {
+            margin-bottom: 0.85rem;
+        }
+
+        .faq-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-body ul, .faq-body ol {
+            margin: 0.75rem 0 1rem 1.5rem;
+        }
+
+        .faq-body li {
+            margin-bottom: 0.35rem;
+        }
+
+        /* Code snippets */
+        code {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            background: var(--bg-subtle);
+            color: var(--primary-text);
+            padding: 0.15rem 0.45rem;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .code-block-wrapper {
+            position: relative;
+            margin: 0.85rem 0;
+        }
+
+        pre {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 1rem 1.25rem;
+            border-radius: 10px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            overflow-x: auto;
+            line-height: 1.5;
+        }
+
+        .btn-copy-code {
+            position: absolute;
+            top: 0.6rem;
+            right: 0.6rem;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-size: 0.725rem;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-copy-code:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Callout boxes */
+        .callout {
+            border-left: 4px solid var(--primary);
+            background: var(--bg-subtle);
+            padding: 1rem 1.25rem;
+            border-radius: 0 10px 10px 0;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .callout-warning {
+            border-left-color: #f59e0b;
+            background: var(--primary-subtle);
+        }
+
+        .callout-danger {
+            border-left-color: #ef4444;
+            background: var(--danger-bg);
+            color: var(--danger-text);
+        }
+
+        /* Search highlights */
+        mark.search-highlight {
+            background-color: #fef08a;
+            color: #854d0e;
+            padding: 0.05em 0.25em;
+            border-radius: 3px;
+        }
+
+        [data-theme="dark"] mark.search-highlight {
+            background-color: #854d0e;
+            color: #fef08a;
+        }
+
+        /* Floating Top Button */
+        .fab-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s ease;
+            z-index: 999;
+        }
+
+        .fab-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .fab-top:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1e293b;
+            color: #ffffff;
+            padding: 0.65rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 2000;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Empty state */
+        .empty-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--bg-surface);
+            border: 1px dashed var(--border-color);
+            border-radius: 16px;
+            display: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 1.5rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+            .navbar-menu {
+                display: none;
+            }
+            .hero-title {
+                font-size: 1.75rem;
+            }
+            .category-filter-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Modern Fixed Navbar -->
+    <header class="navbar">
+        <a href="/dashboard/index.html" class="navbar-brand">
+            <img src="/dashboard/images/xampp-logo.svg" alt="XAMPP Logo">
+            <div class="brand-title">
+                XAMPP <span>8.2</span>
+                <span class="brand-badge">FAQs</span>
+            </div>
+        </a>
+
+        <nav class="navbar-menu">
+            <a href="/dashboard/index.html" class="nav-item">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                </svg>
+                Dashboard
             </a>
-          </li>
-        </ul>
 
-        <section class="top-bar-section">
-          <!-- Left Nav Section -->
-          <ul class="left">
-              <li class="item "><a href="/waterbillingsystem/home.php">Water Billing System</a></li>
-              <li class="item active"><a href="/dashboard/faq.html">FAQs</a></li>
-              <li class="item "><a href="/dashboard/howto.html">HOW-TO Guides</a></li>
-              <li class="item "><a href="/dashboard/phpinfo.php">PHPInfo</a></li>
-              <li class="item "><a href="/phpmyadmin/">phpMyAdmin</a></li>
-          </ul>
-        </section>
-      </nav>
+            <a href="/waterbillingsystem/home.php" class="nav-item nav-item-highlight">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                </svg>
+                Water Billing
+                <span class="badge-app">App</span>
+            </a>
+
+            <a href="/dashboard/faq.html" class="nav-item active">FAQs</a>
+            <a href="/dashboard/howto.html" class="nav-item">HOW-TO Guides</a>
+            <a href="/dashboard/phpinfo.php" class="nav-item">PHPInfo</a>
+            <a href="/phpmyadmin/" class="nav-item">phpMyAdmin</a>
+
+            <!-- Theme Switcher -->
+            <button type="button" class="theme-toggle-btn" id="themeToggle" title="Toggle Dark/Light Mode">
+                <svg id="themeIconSun" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg id="themeIconMoon" style="display:none;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </nav>
     </header>
 
-    <div class="wrapper">
-      <div class="hero">
-  <div class="row">
-    <div class="large-12 columns">
-      <h1>Windows <span>Frequently Asked Questions</span></h1>
-    </div>
-  </div>
-</div>
-<div class="row">
-    <div class="large-8 columns">
-    <dl class="accordion">
-      <dt>How do I install XAMPP?</dt>
-      <dd>
-      <p>XAMPP for Windows exists in three different flavors:</p>
-      <p>Installer:<br />
-      Probably the easiest way to install XAMPP.</p>
-      <p>ZIP:<br />
-      For purists: XAMPP as ordinary ZIP archive.</p>
-      <p>7zip:<br />
-      For purists with low bandwidth: XAMPP as 7zip archive.</p>
-      <p>Note: If you extract the files, there can be false-positives virus warnings.</p>
-      <p><strong>Using the installer:</strong></p>
-      <p></p>
-      <p>The XAMPP control panel for start/stop Apache, MySQL, FileZilla & Mercury or install these server as services.</p>
-      <p><strong>Installing from ZIP</strong></p>
-      <p>Unzip the zip archives into the folder of your choice. XAMPP is extracting to the subdirectory "C:\xampp" below the selected target directory. Now start the file "setup_xampp.bat", to adjust the XAMPP configuration to your system.</p>
-      <p>If you choose a root directory "C:\" as target, you must not start "setup_xampp.bat".</p>
-      <p>Like with the installer version, you can now use the "XAMPP Control Panel" for additional tasks.</p>
-      </dd>
-      <dt>Does XAMPP include MySQL or MariaDB?</dt>
-      <dd>
-      <p>Since XAMPP 5.5.30 and 5.6.14, XAMPP ships MariaDB instead of MySQL. The commands and tools are the same for both.</p>
-      </dd>
-      <dt>How can I start XAMPP without setup?</dt>
-      <dd>
-      <p>If you extract XAMPP in a top level folder like "C:\" or "D:\", you can start most servers like Apache or MySQL directly without execution of the file "setup_xampp.bat".</p>
-      <p>Not using the setup script, or selecting relative paths in the setup script, is preferred if you are installing XAMPP on a usb drive. Because on each pc such a drive can have an other drive letter. You can switch from absolute to relative paths at any time with the setup script.</p>
-      <p>Using the installer from our Downloads page is the easiest way to install XAMPP. After the installation is complete, you will find XAMPP under   Start | Programs | XAMPP. You can use the XAMPP Control Panel to start/stop all server and also install/uninstall services.</p>
-      <p>The XAMPP control panel for start/stop Apache, MySQL, FileZilla & Mercury or install these server as services.</p>
-      </dd>
-      <dt>How do I start and stop XAMPP?</dt>
-      <dd>
-      <p>The universal control center is the "XAMPP Control Panel" (thanks  www.nat32.com). It is started with:</p>
-      <p><code>\xampp\xampp-control.exe</code></p>
-      <p>You can also use some batchfiles to start/stop the servers:</p>
-      <p>
-      <ul>
-        <li>Apache &amp; MySQL start:
-        <code>\xampp\xampp_start.exe</code></li>
-        <li>Apache &amp; MySQL stop:
-        <code>\xampp\xampp_stop.exe</code></li>
-        <li>Apache start:
-        <code>\xampp\apache_start.bat</code></li>
-        <li>Apache stop:
-        <code>\xampp\apache_stop.bat</code></li>
-        <li>MySQL start:
-        <code>\xampp\mysql_start.bat</code></li>
-        <li>MySQL stop:
-        <code>\xampp\mysql_stop.bat</code></li>
-        <li>Mercury Mailserver start:
-        <code>\xampp\mercury_start.bat</code></li>
-        <li>Mercury Mailserver stop:
-        <code>\xampp\mercury_stop.bat</code></li>
-        <li>FileZilla Server start:
-        <code>\xampp\filezilla_start.bat</code></li>
-        <li>FileZilla Server stop:
-        <code>\xampp\filezilla_stop.bat</code></li></ul></p>
-      </p>
-      </dd>
-      <dt>How can I test that everything worked?</dt>
-      <dd>
-      <p>Type in the following URL at your favourite web browser:</p>
-      <p><code>http://localhost/</code> or  <code>http://127.0.0.1/</code> </p>
-      <p>You should see the XAMPP start page, as shown below.</p>
-        <img src="/dashboard/images/screenshots/xampp-windows-start.jpg" />
-      </dd>
-      <dt>How can I install a server as a service?</dt>
-      <dd>
-      <p>Each server in XAMPP you can install also as Windows service. You can also install it from the XAMPP Control Panel. In this case it is necessary to run the scripts or the Control Panel with Administrator privileges.</p>
-      <p>Apache service install: \xampp\apache\apache_installservice.bat</p>
-      <p>Apache service uninstall: \xampp\apache\apache_uninstallservice.bat </p>
-      <p>MySQL service install: \xampp\mysql\mysql_installservice.bat </p>
-      <p>MySQL service uninstall: \xampp\mysql\mysql_uninstallservice.bat </p>
-      <p>FileZilla service (un)install: \xampp\filezilla_setup.bat </p>
-      <p>Mercury: No service installation available</p>
-      </dd>
-      <dt>Is XAMPP production ready?</dt>
-      <dd>
-      <p>XAMPP is not meant for production use but only for development environments. XAMPP is configured to be open as possible to allow the developer anything he/she wants. For development environments, this is great but in a production environment, it could be fatal.</p>
-      <p>Here a list of missing security in XAMPP:</p>
-      <ol>
-        <li>The MySQL administrator (root) has no password.</li>
-        <li>The MySQL daemon is accessible via network.</li>
-        <li>ProFTPD uses the password "lampp" for user "daemon".</li>
-        <li>The default users of Mercury and FileZilla are known.</li>
-      </ol>
-      <p>All points can be a huge security risk. Especially if XAMPP is accessible via network and people outside your LAN. It can also help to use a firewall or a (NAT) router. In case of a router or firewall, your PC is normally not accessible via network. It is up to you to fix these problems. As a small help there is the "XAMPP Security console".</p>
-      <p>Please secure XAMPP before publishing anything online. A firewall or an external router are only sufficient for low levels of security. For slightly more security, you can run the "XAMPP Security console" and assign passwords.</p>
-      <p>If you want have your XAMPP accessible from the internet, you should go to the following URI which can fix some problems:</p>
-      <p><code> http://localhost/security/</code></p>
-      <p>With the security console you can set a password for the MySQL user "root" and phpMyAdmin. You can also enable a authentication for the XAMPP demopages.</p>
-      <p>This web based tool does not fix any additional security issues! Especially the FileZilla FTP server and the Mercury mail server you must secure yourself.</p></dd>
-      <dt>How do I uninstall XAMPP?</dt>
-      <dd>
-      <p>If you installed XAMPP using the installer version, please use the Uninstaller. The Uninstaller will delete all XAMPP entries from your registry and it will uninstall some installed services included with XAMPP. We highly recommend that you use the Uninstall program for removing XAMPP installations from the Installer version.Please backup all the data you want to keep before uninstalling XAMPP.</p>
-      <p>If you installed XAMPP using the ZIP and 7zip versions, shut down all XAMPP servers and exit all panels. If you installed any services, uninstall and shut them down too. Now simply delete the entire folder where XAMPP is installed. There are no registry entries and no environment variables to  clean up.</p>
-      </dd>
-      <dt>What is the "lite" version of XAMPP?</dt>
-      <dd>
-      <p>XAMPP Lite (means "light" as in "light-weight") is a smaller bundle of XAMPP components, which is recommended for quick work using only PHP and MySQL. Some servers or tools such as Mercury Mail and FileZilla FTP are missing in the Lite version.</p>
-      </dd>
-      <dt>Where should I place my web content?</dt>
-      <dd>
-      <p>The main directory for all WWW documents is \xampp\htdocs. If you put a file "test.html" in this directory, you can access it with the URI "http://localhost/test.html".</p>
-      <p>And "test.php"? Just use "http://localhost/test.php". A simple testscript can be:</p>
-      <p><code>&lt;?php<br />
-        echo 'Hello world'; <br />
-        ?&gt;</code></p>
-      <p>A new subdirectory for your web? Just make a new directory (e.g. "new") inside the directory "\xampp\htdocs" (best without whitespaces and only ASCII), create a test file in this directory and access it with "http://localhost/new/test.php".</p>
-      <p><strong>Further specifics</strong></p>
-      <p>HTML:<br>
-      Executable: \xampp\htdocs<br>
-      Allowed endings: .html .htm<br>
-      => basic package</p>
-      <p>SSI:<br>
-      Executable: \xampp\htdocs<br>
-      Allowed endings: .shtml<br>
-      => basic package</p>
-      <p>CGI:<br>
-      Executable: \xampp\htdocs and \xampp\cgi-bin<br>
-      Allowed endings: .cgi<br>
-      => basic package</p>
-      <p>PHP:<br>
-      Executable: \xampp\htdocs and \xampp\cgi-bin<br>
-      Allowed endings: .php<br>
-      => basic package</p>
-      <p>Perl:<br>
-      Executable: \xampp\htdocs and \xampp\cgi-bin<br>
-      Allowed endings: .pl<br>
-      => basic package</p>
-      <p>Apache::ASP Perl:<br>
-      Executable: \xampp\htdocs<br>
-      Allowed endings: .asp<br>
-      => basic package</p>
-      <p>JSP Java:<br>
-      Executable: \xampp\tomcat\webapps\java (e.g.)<br>
-      Allowed endings: .jsp<br>
-      => Tomcat add-on</p>
-      <p>Servlets Java:<br>
-      Executable: \xampp\tomcat\webapps\java (e.g.)<br>
-      Allowed endings: .html (u.a)<br>
-      => Tomcat add-on</p>
-      </dd>
-      <dt>Can I move the XAMPP installation?</dt>
-      <dd>
-      <p>Yes. After moving of the XAMPP directory, you must execute "setup_xampp.bat". The paths in the configuration files will be adjusted with this step.</p>
-      <p>If you have installed any server as Windows service, you must first remove the Windows service, and after the moving you can install the service again.</p>
-      <p>WARNING: The configuration files from your own scripts, like PHP applications, are not adjusted. But it's possible to write a "plug-in" for the installer. With such a plug-in, the installer can adjust such files too.</p>
-      </dd>
-      <dt>What are "Automatic start pages" for the WWW directories?</dt>
-      <dd>
-      <p>The standard filename for the Apache function "DirectoryIndex" is "index.html" or "index.php". Every time you are just browsing to a folder (e.g. "http://localhost/xampp/"), and Apache can find such a file, Apache is displaying this file instead of a directory listing.</p>
-      </dd>
-      <dt>Where can I change the configuration?</dt>
-      <dd>
-      <p>Almost all settings in XAMPP you can change with configuration files. Just open the file in a textedit and change the setting you want. Only FileZilla and Mercury should be configured with the application config tool.</p>
-      </dd>
+    <main class="main-container">
 
-      <dt>Why can't XAMPP work on Windows XP SP2?</dt>
-      <dd>
-      <p>Microsoft delivers a better firewall with service pack 2 (SP2), which starts automatically. This firewall now blocks the necessary ports 80 (http) and 443 (https) and Apache can't start.</p>
-      <p><strong>The fast solution:</strong></p>
-      <p>Disable the Microsoft firewall with the toolbar and try to start XAMPP onces more. The better solution is to define an exception within the security center.</p>
-      <p><strong>The following ports are used for basic functionality:</strong></p>
-      <p>Apache (HTTP): Port 80<br/>
-        Apache (WebDAV): Port 81</br>
-        Apache (HTTPS): Port 443</br>
-        MySQL: Port 3306</br>
-        FileZilla (FTP): Port 21</br>
-        FileZilla (Admin): Port 14147</br>
-        Mercury (SMTP): Port 25</br>
-        Mercury (POP3): Port 110</br>
-        Mercury (IMAP): Port 143</br>
-        Mercury (HTTP): Port 2224</br>
-        Mercury (Finger): Port 79</br>
-        Mercury (PH): Port 105</br>
-        Mercury (PopPass): Port 106</br>
-        Tomcat (AJP/1.3): Port 8009</br>
-        Tomcat (HTTP): Port 8080</p>
-      </dd>
+        <!-- Hero & Search Header -->
+        <section class="hero-banner">
+            <span class="hero-tag">Windows Knowledgebase</span>
+            <h1 class="hero-title">Frequently Asked Questions</h1>
+            <p class="hero-subtitle">
+                Quick answers, solutions for common port conflicts, configuration paths, and troubleshooting steps for your local XAMPP environment.
+            </p>
 
-      <dt>Why doesn't XAMPP work on Vista?</dt>
-      <dd>
-      <p><strong>User Account Control (UAC)</strong></p>
-      <p>In the directory "C:\program files" you don't have full write privileges, even as Admin. Or you have only limited privileges (e.g. for ".\xampp\htdocs"). In this case you can't edit a file.</br>
-<strong>Solution:</strong> Raise your privileges within explorer (right click / security) or deactivate the user account control (UAC).</p>
-      <p>You have installed Apache/MySQL in "C:\xampp" as Windows service. But you can't start/stop the services with the "XAMPP Control Panel" or can't uninstall them.</br></br>
-<strong>Solution:</strong> Use the service management console from Windows or deactivate UAC.</p>
-      <p><strong>Disabling the User Account Control (UAC)</strong></p>
-      <p>To deactivate the UAC, use the program "msconfig". In "msconfig" go to "Tools", select "disable user account control" and verify your selection. Now you must restart Windows. At the same time, you can enable the UAC again.</p>
-      </dd>
+            <div class="search-wrapper">
+                <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input type="text" id="faqSearch" class="search-input" placeholder="Search questions, errors, ports, or directives..." autocomplete="off">
+                <span class="search-shortcut" id="searchShortcut">/</span>
+                <button type="button" id="searchClear" class="search-clear">✕</button>
+            </div>
+        </section>
 
-      <dt>How do I check the md5 checksum?</dt>
-      <dd>
-      <p>To compare files, often checksums are used. A standard to create this checksum md5 (Message Digest Algorithm 5).</p>
-      <p>With this md5 checksum you can test, if your download of the XAMPP package is correct or not. Of course you need a program which can create these checksums. For Windows you can use a tool from Microsoft:</p>
-      <p><a href="http://support.microsoft.com/kb/841290">Availability and description of the File Checksum Integrity Verifier utility</a></p>
-      <p>It's also possible to use any other program which can create md5 checksums, like the GNU md5sum.</p>
-      <p>As you have installed such a program (e.g. fciv.exe), you can do following steps:</p>
-      <p>
-        <ul>
-          <li>Download XAMPP (f.e. xampp-win32-1.8.2-0.exe)</li>
-          <li>Create the checksum with:</br>
-            <code>fciv.exe xampp-win32-1.8.2-0.exe</code>
-          </li>
-          <li>And now you can compare this checksum with that one you can find on the XAMPP for Windows homepage.</li>
-        </ul>
-      </p>
-      <p>If both checksums equal, all is ok. If not, the download is broken or the file has been changed.</p>
-      </dd>
+        <!-- Category Filter & Accordion Controls -->
+        <div class="category-filter-bar">
+            <div class="filter-pills">
+                <button type="button" class="filter-pill active" data-category="all">All Topics</button>
+                <button type="button" class="filter-pill" data-category="general">Installation &amp; Start</button>
+                <button type="button" class="filter-pill" data-category="apache">Apache &amp; Ports</button>
+                <button type="button" class="filter-pill" data-category="database">MySQL &amp; Databases</button>
+                <button type="button" class="filter-pill" data-category="php">PHP &amp; Config</button>
+                <button type="button" class="filter-pill" data-category="security">Security &amp; Permissions</button>
+            </div>
 
-      <dt>Why have changes in my php.ini not taken effect?</dt>
-      <dd>
-      <p>If a change in the "php.ini" has no effect, it's possible PHP is using a different one. You can verify this with phpinfo(). Go to the URI  http://localhost/xampp/phpinfo.php and search for "Loaded Configuration File". This value shows you the "php.ini" PHP is really using.</p>
-      <p><strong>Note:</strong> After changing the "php.ini" you have to restart Apache so that Apache/PHP can read the new settings.</p>
-      </dd>
-
-      <dt>Help! There is a virus in XAMPP!</dt>
-      <dd>
-      <p>Some antivirus programs mistake XAMPP for a virus, typically flagging the file xampp-manager.exe This is a false positive meaning that the antivirus erroneously identified it as a virus, when it is not. Before we release each new version of XAMPP we run it through virus scanning software. At the moment we are using <a href="http://www.kaspersky.com/virusscanner">Kapersky Online Virus Scanner</a>. You can also use the online tool <a href="https://www.virustotal.com/">Virus Total</a> for scanning XAMPP or send us an email to security (at) apachefriends (dot) org if you find any issue.</p>
-      </dd>
-
-      <dt>How do I configure my antivirus application?</dt>
-      <dd>
-      <p>We have included all dependences and servers required for running the bundled web application, so you will find that XAMPP installs large numbers of files. If you are installing a XAMPP application on a Windows machine with an antivirus app enabled, this may slow down the installation significantly, and there is also a chance that one of the servers (web server, database server) may be blocked by the antivirus software. If you have an antivirus tool enabled, check the following settings for running XAMPP without performance issues:</p>
-      <p>
-        <ul>
-          <li>Add exceptions in the firewall: for Apache, MySQL or any other server.</li>
-          <li>Scan files when executing: If you have enabled the antivirus scan for all files, the executable files for the servers may slow down.</li>
-          <li>Scan the traffic for different URLs: If you are developing with XAMPP on your own machine, you can exclude "localhost" traffic in the Antivirus settings.</li>
-        </ul>
-      </p>
-      </dd>
-
-      <dt>Why doesn't the Apache server start on my system?</dt>
-      <dd>
-      <p>This problem can be one of several reasons:</p>
-      <p>
-        <ul>
-          <li>You have started more then one HTTP Server (IIS, Sambar, ZEUS and so on). Only one Server can use port 80. This error message indicate the problem:<br/>
-<code>(OS 10048)... make_sock: could not bind to adress 0.0.0.0:80
-no listening sockets available, shutting down</code></li>
-          <li>You have other software, such as the Internet Telephone "Skype" which also blocks the port 80. If the problem is "Skype", you can go in Skype to Actions --> Options --> Connection --> remove the check mark at "use port 80 for an alternate port" and restart Skype. Now it should work.</li>
-          <li>You have a firewall which blocks the Apache port. Not all firewalls are compatible with Apache, and sometimes deactivating the firewall is not enough and you must deinstall it. This error message indicates a firewall:<br/>
-<code>(OS 10038)Socket operation on non-socket: make_sock: for address 0.0.0.0:80,
-apr_socket_opt_set: (SO_KEEPALIVE)</code></li>
-        </ul>
-        <p>Also if Apache can start, but your browser can't connect to it it could be due to one of the following:</p>
-        <ul>
-          <li>Some virus scanners can cause this in the same way that firewalls can interfere.</li>
-          <li>You have XP Professional without service pack 1. You must have at least SP1 for XAMPP.</li>
-        </ul>
-      </p>
-      <p><strong>Tip:</strong> If you have problems with used ports, you can try the tool "xampp-portcheck.exe". Maybe it can help.</p>
-      </dd>
-
-      <dt>Why is my CPU load for Apache almost 99%?</dt>
-      <dd>
-      <p>There is one of two scenarios at play here. Either your CPU is maxing out, or you can browser connect to the server, but not see anything (the system is trying unsucessfully to load the page). In either case you can find the following message in the Apache log file:</p>
-      <p><code>Child: Encountered too many AcceptEx faults accepting client connections.
-winnt_mpm: falling back to 'AcceptFilter none'.</code></p>
-      <p>The MPM falls back to a safer implementation, but some client requests were not processed correctly. In order to avoid this error, use "AcceptFilter" with accept filter "none" in the "\xampp\apache\conf\extra\httpd-mpm.conf" file.</p>
-      </dd>
-
-      <dt>Why are pictures and style-sheets not displayed?</dt>
-      <dd>
-      <p>Sometimes there are problems with displaying pictures and style-sheets. Especially if these files are located on a network drive. In this case you can enable (or add) one if the following lines in the file "\xampp\apache\conf\httpd.conf":</p>
-      <p><code>EnableSendfile off</br>
-EnableMMAP off</code></p>
-      <p>This problem can also be caused by programs for regulating bandwidth, like NetLimiter.</p>
-      </dd>
-
-      <dt>How do I send email with XAMPP?</dt>
-      <dd>
-        <p>To configure XAMPP to use the included sendmail.exe binary for email delivery, follow these steps:</p>
-        <ul>
-          <li>Edit the XAMPP "php.ini" file. Within this file, find the [mail function] section and replace it with the following directives. Change the XAMPP installation path if needed.
-          <code>
-          sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"
-          </code>
-          </li>
-          <li>Edit the XAMPP "sendmail.ini" file. Within this file, find the [sendmail] section and replace it with the following directives:
-          <code>
-          smtp_server=smtp.gmail.com
-          smtp_port=465
-          smtp_ssl=auto
-          error_logfile=error.log
-          auth_username=your-gmail-username@gmail.com
-          auth_password=your-gmail-password
-          </code>
-          <p>Remember to replace the dummy values shown with your actual Gmail address and account password. If you don't plan to use Gmail's SMTP server, replace the SMTP host details with appropriate values for your organization or ISP's SMTP server.</p>
-          </li>
-          <li>Restart the Apache server using the XAMPP control panel.
-          </li>
-        </ul>
-        <p>You can now use PHP's mail() function to send email from your application.</p> 
-      </dd>
-      
-      <dt>How can I set a root password in MySQL?</dt>
-      <dd>
-      <p>Configure it with the "XAMPP Shell" (command prompt). Open the shell from the XAMPP control pane and execute this command:<code>mysqladmin.exe -u root password secret</code>This sets the root password to 'secret'.</p>
-      </dd>
-
-      <dt>Can I use my own MySQL server?</dt>
-      <dd>
-      <p>Yes. Simply don't start the MySQL from the XAMPP package. Please note that two servers cannot be started on the same port. If you have set a password for "root", please do not forget to edit the file "\xampp\phpMyAdmin\config.inc.php".</p>
-      </dd>
-
-      <dt>How do I restrict access to phpMyAdmin from the outside?</dt>
-      <dd>
-      <p>In the basic configuration of XAMPP, phpMyAdmin is accessible only from the same host that XAMPP is running on, at http://127.0.0.1 or http://localhost.</p>
-      <p>Before you can access the MySQL server, phpMyAdmin will prompt you for a user name and password. Don't forget to set a password for the user "root" first.</p>
-      </dd>
-
-      <dt>How do I enable access to phpMyAdmin from the outside?</dt>
-      <dd>
-      <p>In the basic configuration of XAMPP, phpMyAdmin is accessible only from the same host that XAMPP is running on, at http://127.0.0.1 or http://localhost.</p>
-      <p>IMPORTANT: Enabling external access for phpMyAdmin in production environments is a significant security risk. You are strongly advised to only allow access from localhost. A remote attacker could take advantage of any existing vulnerability for executing code or for modifying your data.</p>
-      <p>To enable remote access to phpMyAdmin, follow these steps:</p>
-      <ul>
-        <li>Edit the apache\conf\extra\httpd-xampp.conf file in your XAMPP installation directory.</li>
-        <li>Within this file, find the lines below. 
-          <p><code>
-              Alias /phpmyadmin "C:/xampp/phpMyAdmin/"
-              &lt;Directory "C:/xampp/phpMyAdmin"&gt;
-                AllowOverride AuthConfig
-                Require local
-          </code></p>
-        </li>
-        <li>Then replace 'Require local' with 'Require all granted'.</li>
-          <p><code>
-              Alias /phpmyadmin "C:/xampp/phpMyAdmin/"
-              &lt;Directory "C:/xampp/phpMyAdmin"&gt;
-                AllowOverride AuthConfig
-                Require all granted
-          </code></p>
-        <li>Restart the Apache server using the XAMPP control panel.</li>
-      </ul>
-      </dd>
-      
-      <dt>Where is the IMAP support for PHP?</dt>
-      <dd>
-      <p>As default, the IMAP support for PHP is deactivated in XAMPP due to some mysterious initialization errors with some home versions like Windows 98. If you work with NT systems, you can open the file "\xampp\php\php.ini" to activate the php exstension by removing the beginning semicolon at the line ";extension=php_imap.dll". It should be:</br>
-<code>extension=php_imap.dll</code></p>
-      <p>Now restart Apache and IMAP should work. You can use the same steps for every extension, which is not enabled in the default configuration.</p>
-      </dd>
-
-      <dt>Why don't some PHP open source apps work with XAMPP on Windows?</dt>
-      <dd>
-      <p>A lot of PHP applications or extensions that have been written for Linux haven’t been ported to Windows. </p>
-      </dd>
-
-      <dt>Can I delete the "install" directory after installation?</dt>
-      <dd>
-      <p>It's better not to. The scripts here are still needed for all additional packages (add-ons) and upgrades of XAMPP.</p>
-      </dd>
-
-      <dt>How do I activate the eaccelerator?</dt>
-      <dd>
-      <p>Like other (Zend) extensions, you can activate it in "php.ini". In this file, enable the line ";zend_extension = "\xampp\php\ext\php_eaccelerator.dll"". It should be:</br>
-<code>zend_extension = "\xampp\php\ext\php_eaccelerator.dll"</code></p>
-      </dd>
-
-      <dt>How do I fix a connection error to my MS SQL server?</dt>
-      <dd>
-      <p>If the mssql extension was loaded in the php.ini, sometimes problems appear when only TCP/IP is used. You can fix that problem with a newer "ntwdblib.dll" from Microsoft. Please replace the older file in "\xampp\apache\bin" and "\xampp\php" with the new one. Because of the license, we can't package a newer version of this file with XAMPP.</p>
-      </dd>
-
-      <dt>How do I work with the PHP mcrypt extension?</dt>
-      <dd>
-      <p>For this, we have opened a topic in the forum with examples and possible solutions: <a href="https://community.apachefriends.org/f/viewtopic.php?t=3012">MCrypt topic</a></p>
-      </dd>
-
-      <dt>Do Microsoft Active Server Pages (ASP) work with XAMPP?</dt>
-      <dd>
-      <p>No. And Apache::ASP with the Perl Add-On is not the same. Apache::ASP only knows Perl-Script, but ASP from the Internet Information Server (IIS) also knows the normal VBScript. But for ASP .NET, there is a 3rd party Apache module available.</p>
-      </dd>
-
-      <dt>How can I get XAMPP working on port 80 under Windows 10?</dt>
-      <dd>
-      <p>By default, Windows 10 starts Microsoft IIS on port 80, which is the same default port used by Apache in XAMPP. As a result, Apache cannot bind to port 80.</p>
-      <p>To deactivate IIS from running on port 80, follow these steps:</p>
-      <ul>
-        <li>Open the Services panel in Computer Management.</li>
-        <li>Search for the 'World Wide Web Publishing Service' and select it.</li>
-        <li>Click the link to 'Stop the service'.</li>
-        <li>Double-click the service name.</li>
-        <li>In the 'Startup type' field, change the startup type to 'Disabled'.</li>
-        <li>Click 'OK' to save your changes.</li>
-      </ul>
-      <p>You should now be able to start Apache in XAMPP on port 80.</p>
-      <p>For more information, refer to the 'Troubleshoot Apache Startup Problems' guide included with XAMPP or <a href='https://community.apachefriends.org/f/viewtopic.php?f=16&t=71620'>this forum post</a>.</p>
-      </dd>
-      
-      <dt>How can I use Microsoft Edge to access local addresses under Windows 10?</dt>
-      <dd>
-      <p>If your local machine has the host name 'myhost', you will not be able to access URLs such as http://myhost in Microsoft Edge. To resolve this, you should instead use the addresses http://127.0.0.1 or http://localhost.</p>
-      </dd>
-
-      <dt>Where are the main XAMPP configuration files?</dt>
-      <dd>
-        <p>The main XAMPP configuration files are located as follows:</p>
-        <ul>
-          <li>Apache configuration file: \xampp\apache\conf\httpd.conf, \xampp\apache\conf\extra\httpd-xampp.conf</li>
-          <li>PHP configuration file: \xampp\php\php.ini</li>
-          <li>MySQL configuration file: \xampp\mysql\bin\my.ini</li>
-          <li>FileZilla Server configuration file: \xampp\FileZillaFTP\FileZilla Server.xml</li>
-          <li>Apache Tomcat configuration file: \xampp\tomcat\conf\server.xml</li>
-          <li>Apache Tomcat configuration file: \xampp\sendmail\sendmail.ini</li>
-          <li>Mercury Mail configuration file: \xampp\MercuryMail\MERCURY.INI</li>
-        </ul>
-      </dd>
-
-    </dl>
-  </div>
-</div>
-
-    </div>
-
-    <footer class="footer row">
-      <div class="columns">
-        <div class="footer_lists-container row collapse">
-          <div class="footer_social columns large-2">
-            <ul class="social">
-  <li class="twitter"><a href="https://twitter.com/apachefriends">Follow us on Twitter</a></li>
-  <li class="facebook"><a href="https://www.facebook.com/we.are.xampp">Like us on Facebook</a></li>
-</ul>
-
-            <p class="footer_copyright">Copyright (c) 2022, Apache Friends</p>
-          </div>
-          <ul class="footer_links columns large-9">
-            <li><a href="https://www.apachefriends.org/blog.html">Blog</a></li>
-            <li><a href="/privacy_policy.html">Privacy Policy</a></li>
-            <li>
-<a target="_blank" href="http://www.fastly.com/">                CDN provided by
-                <img width="48" data-2x="/dashboard/images/fastly-logo@2x.png" src="/dashboard/images/fastly-logo.png" />
-</a>            </li>
-          </ul>
+            <div class="accordion-controls">
+                <button type="button" class="btn-toggle-all" id="expandAllBtn">Expand All</button>
+                <button type="button" class="btn-toggle-all" id="collapseAllBtn">Collapse All</button>
+            </div>
         </div>
-      </div>
+
+        <!-- Empty search result card -->
+        <div id="emptyResults" class="empty-results">
+            <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🔍</div>
+            <h3 class="fw-bold mb-2">No matching questions found</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">Try searching for terms like "port 80", "php.ini", "mysql password", or "sendmail".</p>
+            <button type="button" class="btn-toggle-all" onclick="clearSearch()">Reset Search</button>
+        </div>
+
+        <!-- CATEGORY 1: Installation & Starting XAMPP -->
+        <section class="category-section" data-cat-section="general">
+            <h2 class="category-heading">
+                <span class="category-icon">🚀</span>
+                Installation &amp; General Operation
+                <span class="category-count">5 questions</span>
+            </h2>
+
+            <div class="faq-accordion">
+                <!-- Item 1 -->
+                <div class="faq-card" data-category="general">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Setup</span>
+                            <span class="faq-question">How do I install and start XAMPP?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>XAMPP for Windows is available as an installer executable or a portable ZIP package:</p>
+                        <ul>
+                            <li><strong>Installer:</strong> The recommended method. Runs the setup wizard and configures shortcuts under <code>Start &gt; Programs &gt; XAMPP</code>.</li>
+                            <li><strong>ZIP/7zip:</strong> Extract into your desired drive root (e.g. <code>C:\xampp</code>). If placed in another folder, run <code>setup_xampp.bat</code> once to update relative path references.</li>
+                        </ul>
+                        <p>The universal control interface is the <strong>XAMPP Control Panel</strong>:</p>
+                        <div class="code-block-wrapper">
+                            <pre>C:\xampp\xampp-control.exe</pre>
+                            <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <p>You can also use standalone batch scripts in <code>C:\xampp</code> to start and stop services directly:</p>
+                        <ul>
+                            <li><code>apache_start.bat</code> / <code>apache_stop.bat</code></li>
+                            <li><code>mysql_start.bat</code> / <code>mysql_stop.bat</code></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="faq-card" data-category="general">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Verification</span>
+                            <span class="faq-question">How can I test that everything is working?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>Open your browser and navigate to either:</p>
+                        <div class="code-block-wrapper">
+                            <pre>http://localhost/   or   http://127.0.0.1/</pre>
+                            <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <p>You should see the active XAMPP Dashboard. From here you can test PHP by visiting <code>/dashboard/phpinfo.php</code> or database access at <code>/phpmyadmin/</code>.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="faq-card" data-category="general">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Files</span>
+                            <span class="faq-question">Where should I place my web projects and PHP files?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>The default document root for all web documents is:</p>
+                        <div class="code-block-wrapper">
+                            <pre>C:\xampp\htdocs</pre>
+                            <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <p>For example, if you place a project folder named <code>waterbillingsystem</code> in <code>C:\xampp\htdocs\waterbillingsystem</code>, it is accessible in your browser at:</p>
+                        <div class="code-block-wrapper">
+                            <pre>http://localhost/waterbillingsystem/</pre>
+                            <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <p>Standard index files such as <code>index.php</code> or <code>index.html</code> are automatically served when browsing to a folder URL.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="faq-card" data-category="general">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Services</span>
+                            <span class="faq-question">How can I install Apache or MySQL as a Windows service?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>Installing a component as a service allows it to start automatically when Windows boots:</p>
+                        <ol>
+                            <li>Launch <strong>XAMPP Control Panel</strong> with <strong>Administrator privileges</strong> (Right-click &gt; Run as administrator).</li>
+                            <li>Click the checkbox with the red <code>X</code> next to Apache or MySQL.</li>
+                            <li>Confirm installation when prompted; the icon changes to a green checkmark.</li>
+                        </ol>
+                        <p>Alternatively, run the dedicated service scripts with administrator rights:</p>
+                        <div class="code-block-wrapper">
+                            <pre>Apache: C:\xampp\apache\apache_installservice.bat
+MySQL:  C:\xampp\mysql\mysql_installservice.bat</pre>
+                            <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="faq-card" data-category="general">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Uninstall</span>
+                            <span class="faq-question">How do I cleanly uninstall or relocate XAMPP?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>Always back up your <code>C:\xampp\htdocs</code> and <code>C:\xampp\mysql\data</code> folders before uninstalling:</p>
+                        <ul>
+                            <li><strong>Installer version:</strong> Run <code>C:\xampp\uninstall.exe</code> to unregister services and clean registry entries.</li>
+                            <li><strong>ZIP/Portable version:</strong> Stop all running servers in the control panel, uninstall any registered Windows services, and delete the <code>C:\xampp</code> directory.</li>
+                            <li><strong>Relocating XAMPP:</strong> If moving to another drive or folder, run <code>C:\xampp\setup_xampp.bat</code> to update internal path configurations.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 2: Apache & Port Conflicts -->
+        <section class="category-section" data-cat-section="apache">
+            <h2 class="category-heading">
+                <span class="category-icon">🌐</span>
+                Apache &amp; Port Troubleshooting
+                <span class="category-count">4 questions</span>
+            </h2>
+
+            <div class="faq-accordion">
+                <!-- Item 6 -->
+                <div class="faq-card" data-category="apache">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Port 80</span>
+                            <span class="faq-question">Why won't Apache start? (Port 80 / 443 already in use)</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>If Apache fails with <code>make_sock: could not bind to address 0.0.0.0:80</code>, another program is already using port 80 or 443.</p>
+                        <p><strong>Common culprits and fixes:</strong></p>
+                        <ul>
+                            <li><strong>IIS (World Wide Web Publishing Service):</strong> Open Windows Services (<code>services.msc</code>), locate <em>World Wide Web Publishing Service</em>, stop it and set Startup type to <em>Disabled</em>.</li>
+                            <li><strong>Skype:</strong> Go to Skype Settings &gt; Advanced &gt; Connection and disable "Use port 80 and 443 as alternatives".</li>
+                            <li><strong>Change Apache's Port:</strong> If port 80 cannot be freed, open <code>C:\xampp\apache\conf\httpd.conf</code> and change:
+                                <div class="code-block-wrapper">
+                                    <pre>Listen 8080
+ServerName localhost:8080</pre>
+                                    <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                                </div>
+                                Then access your server at <code>http://localhost:8080/</code>.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="faq-card" data-category="apache">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Windows 10/11</span>
+                            <span class="faq-question">How do I disable Microsoft IIS to free up port 80?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>On Windows 10 and 11, Microsoft IIS services often claim port 80 by default:</p>
+                        <ol>
+                            <li>Press <kbd>Win + R</kbd>, type <code>services.msc</code>, and hit Enter.</li>
+                            <li>Scroll down to find <strong>World Wide Web Publishing Service</strong>.</li>
+                            <li>Right-click and select <strong>Properties</strong>.</li>
+                            <li>Click <strong>Stop</strong>, then change <strong>Startup type</strong> to <strong>Disabled</strong>.</li>
+                            <li>Click OK, then start Apache in the XAMPP Control Panel.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Item 8 -->
+                <div class="faq-card" data-category="apache">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Performance</span>
+                            <span class="faq-question">Why is CPU usage high for Apache? (AcceptEx errors)</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>If you see <code>Child: Encountered too many AcceptEx faults</code> in <code>C:\xampp\apache\logs\error.log</code>, Windows network stack filters are timing out.</p>
+                        <p><strong>Solution:</strong> Open <code>C:\xampp\apache\conf\extra\httpd-mpm.conf</code> (or <code>httpd.conf</code>) and add:</p>
+                        <div class="code-block-wrapper">
+                            <pre>AcceptFilter http none
+AcceptFilter https none</pre>
+                            <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <p>Restart Apache to apply the change.</p>
+                    </div>
+                </div>
+
+                <!-- Item 9 -->
+                <div class="faq-card" data-category="apache">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Assets</span>
+                            <span class="faq-question">Why are images or stylesheets sometimes failing to load?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>On some Windows network drives or file shares, Apache's memory-mapped I/O can fail to deliver static assets cleanly.</p>
+                        <p><strong>Fix:</strong> Open <code>C:\xampp\apache\conf\httpd.conf</code> and add or uncomment these lines:</p>
+                        <div class="code-block-wrapper">
+                            <pre>EnableSendfile off
+EnableMMAP off</pre>
+                            <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <p>Restart Apache after modifying the file.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 3: MySQL & Databases -->
+        <section class="category-section" data-cat-section="database">
+            <h2 class="category-heading">
+                <span class="category-icon">🗄️</span>
+                MySQL, MariaDB &amp; phpMyAdmin
+                <span class="category-count">4 questions</span>
+            </h2>
+
+            <div class="faq-accordion">
+                <!-- Item 10 -->
+                <div class="faq-card" data-category="database">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Engine</span>
+                            <span class="faq-question">Does XAMPP include MySQL or MariaDB?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>Modern XAMPP releases ship with <strong>MariaDB</strong> as a 100% binary drop-in replacement for MySQL. All tools (including <code>mysql.exe</code>, <code>mysqldump.exe</code>, PHP's <code>pdo_mysql</code> and <code>mysqli</code> extensions, and phpMyAdmin) work identically without changes to your PHP code.</p>
+                    </div>
+                </div>
+
+                <!-- Item 11 -->
+                <div class="faq-card" data-category="database">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Security</span>
+                            <span class="faq-question">How can I set or change the MySQL root password?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>By default in XAMPP, the MySQL <code>root</code> user has an empty password (no password).</p>
+                        <p>To assign a root password, click <strong>Shell</strong> in the XAMPP Control Panel and run:</p>
+                        <div class="code-block-wrapper">
+                            <pre>mysqladmin.exe -u root password "your_new_password"</pre>
+                            <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <div class="callout callout-warning">
+                            <strong>Important for phpMyAdmin:</strong> After setting a root password, update <code>C:\xampp\phpMyAdmin\config.inc.php</code> by adding your password:
+                            <br><code>$cfg['Servers'][$i]['password'] = 'your_new_password';</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 12 -->
+                <div class="faq-card" data-category="database">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">phpMyAdmin</span>
+                            <span class="faq-question">How do I restrict or allow external network access to phpMyAdmin?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>By default, phpMyAdmin is restricted exclusively to local connections (<code>Require local</code>) for security.</p>
+                        <p>To inspect or modify access, edit <code>C:\xampp\apache\conf\extra\httpd-xampp.conf</code>:</p>
+                        <div class="code-block-wrapper">
+                            <pre>&lt;Directory "C:/xampp/phpMyAdmin"&gt;
+    AllowOverride AuthConfig
+    Require local
+&lt;/Directory&gt;</pre>
+                            <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <p>Never set <code>Require all granted</code> on production or public servers without strong password protection.</p>
+                    </div>
+                </div>
+
+                <!-- Item 13 -->
+                <div class="faq-card" data-category="database">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Custom MySQL</span>
+                            <span class="faq-question">Can I use an external MySQL server instead of the bundled one?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>Yes. Simply do not start MySQL from the XAMPP Control Panel. In your application's database configuration (e.g. <code>config.php</code>), update <code>$db_host</code>, <code>$db_port</code>, and credentials to point to your custom MySQL or remote instance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 4: PHP & Configuration -->
+        <section class="category-section" data-cat-section="php">
+            <h2 class="category-heading">
+                <span class="category-icon">⚙️</span>
+                PHP &amp; Configuration Directives
+                <span class="category-count">5 questions</span>
+            </h2>
+
+            <div class="faq-accordion">
+                <!-- Item 14 -->
+                <div class="faq-card" data-category="php">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">php.ini</span>
+                            <span class="faq-question">Why have changes in my php.ini not taken effect?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>Two common reasons cause changes in <code>php.ini</code> not to appear:</p>
+                        <ol>
+                            <li><strong>Apache was not restarted:</strong> Apache reads <code>php.ini</code> only once during initialization. Click <strong>Stop</strong> and then <strong>Start</strong> on Apache in the XAMPP Control Panel.</li>
+                            <li><strong>Wrong file edited:</strong> The official active configuration file is:
+                                <div class="code-block-wrapper">
+                                    <pre>C:\xampp\php\php.ini</pre>
+                                    <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                                </div>
+                                You can verify the active file anytime on the <a href="/dashboard/phpinfo.php">PHPInfo Dashboard</a> under <em>Loaded Configuration File</em>.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Item 15 -->
+                <div class="faq-card" data-category="php">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Mail</span>
+                            <span class="faq-question">How do I configure PHP mail() with sendmail in XAMPP?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>To enable PHP's <code>mail()</code> function on Windows, configure the included <code>sendmail.exe</code> utility:</p>
+                        <ol>
+                            <li>Open <code>C:\xampp\php\php.ini</code>, locate <code>[mail function]</code>, and set:
+                                <div class="code-block-wrapper">
+                                    <pre>sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"</pre>
+                                    <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                                </div>
+                            </li>
+                            <li>Open <code>C:\xampp\sendmail\sendmail.ini</code> and configure your SMTP credentials:
+                                <div class="code-block-wrapper">
+                                    <pre>smtp_server=smtp.gmail.com
+smtp_port=587
+smtp_ssl=tls
+auth_username=your_email@gmail.com
+auth_password=your_app_password</pre>
+                                    <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                                </div>
+                            </li>
+                            <li>Restart Apache in the XAMPP Control Panel.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Item 16 -->
+                <div class="faq-card" data-category="php">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Paths</span>
+                            <span class="faq-question">Where are the main XAMPP configuration files located?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>Key configuration files across all XAMPP components:</p>
+                        <div class="code-block-wrapper">
+                            <pre>Apache HTTP Config:    C:\xampp\apache\conf\httpd.conf
+Apache SSL / VHosts:   C:\xampp\apache\conf\extra\httpd-vhosts.conf
+PHP Configuration:     C:\xampp\php\php.ini
+MySQL / MariaDB Config:C:\xampp\mysql\bin\my.ini
+phpMyAdmin Config:     C:\xampp\phpMyAdmin\config.inc.php
+Sendmail Config:       C:\xampp\sendmail\sendmail.ini</pre>
+                            <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 17 -->
+                <div class="faq-card" data-category="php">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Extensions</span>
+                            <span class="faq-question">How do I enable PHP extensions (e.g. curl, intl, com_dotnet)?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>To enable an extension:</p>
+                        <ol>
+                            <li>Open <code>C:\xampp\php\php.ini</code> in a text editor.</li>
+                            <li>Search for the extension directive (e.g. <code>extension=intl</code> or <code>extension=com_dotnet</code>).</li>
+                            <li>Remove the leading semicolon (<code>;</code>) if present.</li>
+                            <li>Save the file and restart Apache.</li>
+                        </ol>
+                        <p>Check the loaded extension status in real-time via <a href="/dashboard/phpinfo.php">PHPInfo</a>.</p>
+                    </div>
+                </div>
+
+                <!-- Item 18 -->
+                <div class="faq-card" data-category="php">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Uploads</span>
+                            <span class="faq-question">How do I increase upload size and memory limits?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>To permit larger database imports in phpMyAdmin or large file uploads, edit <code>C:\xampp\php\php.ini</code>:</p>
+                        <div class="code-block-wrapper">
+                            <pre>upload_max_filesize = 128M
+post_max_size = 128M
+memory_limit = 512M
+max_execution_time = 300</pre>
+                            <button type="button" class="btn-copy-code" onclick="copyCode(this)">Copy</button>
+                        </div>
+                        <p>Save and restart Apache.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 5: Security & Permissions -->
+        <section class="category-section" data-cat-section="security">
+            <h2 class="category-heading">
+                <span class="category-icon">🔒</span>
+                Security, UAC &amp; Windows Permissions
+                <span class="category-count">3 questions</span>
+            </h2>
+
+            <div class="faq-accordion">
+                <!-- Item 19 -->
+                <div class="faq-card" data-category="security">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Production</span>
+                            <span class="faq-question">Is XAMPP safe for production environments?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <div class="callout callout-danger">
+                            <strong>Notice:</strong> XAMPP is configured intentionally open for developer convenience and local experimentation. It is <strong>not</strong> hardened for public production deployment without explicit security adjustments.
+                        </div>
+                        <p>Default security considerations:</p>
+                        <ul>
+                            <li>The MySQL administrator (<code>root</code>) has no password by default.</li>
+                            <li>The database daemon may be reachable via local network unless firewall-restricted.</li>
+                            <li>phpMyAdmin and demo pages are configured for quick development access.</li>
+                        </ul>
+                        <p>Always assign strong passwords and restrict network interfaces before exposing your system outside localhost.</p>
+                    </div>
+                </div>
+
+                <!-- Item 20 -->
+                <div class="faq-card" data-category="security">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">Antivirus</span>
+                            <span class="faq-question">Help! My Antivirus flagged a file in XAMPP (False Positives)</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>Some security software flags server binaries or tools like <code>xampp-control.exe</code>. This is typically a false positive because the software binds local network sockets.</p>
+                        <p><strong>Recommended Antivirus adjustments:</strong></p>
+                        <ul>
+                            <li>Add an exception or whitelist for the folder <code>C:\xampp</code>.</li>
+                            <li>Allow port 80, 443, and 3306 in your local Windows Defender Firewall.</li>
+                            <li>Exclude <code>localhost</code> / <code>127.0.0.1</code> from web traffic real-time scanning to accelerate page loading.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Item 21 -->
+                <div class="faq-card" data-category="security">
+                    <div class="faq-header">
+                        <div class="faq-title-area">
+                            <span class="faq-badge">UAC</span>
+                            <span class="faq-question">Why does User Account Control (UAC) block writing files in C:\Program Files?</span>
+                        </div>
+                        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="faq-body">
+                        <p>Windows strictly restricts write access inside <code>C:\Program Files</code> without elevated permissions. If XAMPP is installed there, Apache and PHP scripts may fail to write logs, upload files, or edit configurations.</p>
+                        <p><strong>Recommendation:</strong> Always install XAMPP in a root folder such as <code>C:\xampp</code>, or right-click the XAMPP Control Panel and select <strong>Run as administrator</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Back to Top Button -->
+    <button type="button" id="fabTop" class="fab-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to top">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/>
+        </svg>
+    </button>
+
+    <!-- Floating Toast Message -->
+    <div id="toast" class="toast">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#4ade80">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+        </svg>
+        <span id="toastMsg">Copied!</span>
+    </div>
+
+    <!-- Modern Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                &copy; Apache Friends &bull; XAMPP Documentation &amp; Knowledgebase
+            </div>
+            <div class="footer-links">
+                <a href="/dashboard/index.html">Dashboard</a>
+                <a href="/waterbillingsystem/home.php">Water Billing System</a>
+                <a href="/dashboard/phpinfo.php">PHP Info</a>
+                <a href="/dashboard/howto.html">HOW-TO Guides</a>
+                <a href="https://community.apachefriends.org" target="_blank" rel="noopener">Community Forums</a>
+            </div>
+        </div>
     </footer>
 
-    <!-- JS Libraries -->
-    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="/dashboard/javascripts/all.js" type="text/javascript"></script>
-  </body>
+    <script>
+        // Synchronized Dark / Light Theme
+        const htmlEl = document.documentElement;
+        const themeToggle = document.getElementById('themeToggle');
+        const sunIcon = document.getElementById('themeIconSun');
+        const moonIcon = document.getElementById('themeIconMoon');
+
+        function setTheme(theme) {
+            htmlEl.setAttribute('data-theme', theme);
+            localStorage.setItem('phpinfo_theme', theme);
+            if (theme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+        }
+
+        const savedTheme = localStorage.getItem('phpinfo_theme') || 
+            (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const current = htmlEl.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+
+        // Accordion Toggle
+        const faqCards = document.querySelectorAll('.faq-card');
+        faqCards.forEach(card => {
+            const header = card.querySelector('.faq-header');
+            header.addEventListener('click', () => {
+                card.classList.toggle('open');
+            });
+        });
+
+        // Expand / Collapse All
+        document.getElementById('expandAllBtn').addEventListener('click', () => {
+            document.querySelectorAll('.faq-card:not([style*="display: none"])').forEach(c => c.classList.add('open'));
+        });
+
+        document.getElementById('collapseAllBtn').addEventListener('click', () => {
+            document.querySelectorAll('.faq-card').forEach(c => c.classList.remove('open'));
+        });
+
+        // Category Filter Pills
+        const filterPills = document.querySelectorAll('.filter-pill');
+        const categorySections = document.querySelectorAll('.category-section');
+
+        filterPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                filterPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+
+                const cat = pill.getAttribute('data-category');
+                if (cat === 'all') {
+                    categorySections.forEach(s => s.style.display = '');
+                    faqCards.forEach(c => c.style.display = '');
+                } else {
+                    categorySections.forEach(s => {
+                        if (s.getAttribute('data-cat-section') === cat) {
+                            s.style.display = '';
+                            s.querySelectorAll('.faq-card').forEach(c => c.style.display = '');
+                        } else {
+                            s.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Live Real-Time Search & Highlighting
+        const searchInput = document.getElementById('faqSearch');
+        const searchClear = document.getElementById('searchClear');
+        const searchShortcut = document.getElementById('searchShortcut');
+        const emptyResults = document.getElementById('emptyResults');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim().toLowerCase();
+            if (query.length > 0) {
+                searchClear.style.display = 'block';
+                searchShortcut.style.display = 'none';
+                performFaqSearch(query);
+            } else {
+                clearSearch();
+            }
+        });
+
+        function clearSearch() {
+            searchInput.value = '';
+            searchClear.style.display = 'none';
+            searchShortcut.style.display = 'block';
+            emptyResults.style.display = 'none';
+
+            categorySections.forEach(s => s.style.display = '');
+            faqCards.forEach(card => {
+                card.style.display = '';
+                card.classList.remove('open');
+                unmarkText(card);
+            });
+        }
+
+        searchClear.addEventListener('click', clearSearch);
+
+        // Keyboard Shortcuts
+        window.addEventListener('keydown', (e) => {
+            if ((e.key === '/' || (e.ctrlKey && e.key.toLowerCase() === 'k')) && document.activeElement !== searchInput) {
+                e.preventDefault();
+                searchInput.focus();
+                searchInput.select();
+            } else if (e.key === 'Escape' && document.activeElement === searchInput) {
+                clearSearch();
+                searchInput.blur();
+            }
+        });
+
+        function unmarkText(el) {
+            el.querySelectorAll('mark.search-highlight').forEach(mark => {
+                const parent = mark.parentNode;
+                parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                parent.normalize();
+            });
+        }
+
+        function highlightQuery(element, query) {
+            const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            let node;
+            while (node = walker.nextNode()) {
+                if (node.parentElement && node.parentElement.tagName !== 'MARK' && node.parentElement.tagName !== 'SCRIPT') {
+                    textNodes.push(node);
+                }
+            }
+
+            textNodes.forEach(tNode => {
+                const text = tNode.nodeValue;
+                const lower = text.toLowerCase();
+                const idx = lower.indexOf(query);
+                if (idx !== -1) {
+                    const before = text.substring(0, idx);
+                    const match = text.substring(idx, idx + query.length);
+                    const after = text.substring(idx + query.length);
+
+                    const mark = document.createElement('mark');
+                    mark.className = 'search-highlight';
+                    mark.textContent = match;
+
+                    const frag = document.createDocumentFragment();
+                    if (before) frag.appendChild(document.createTextNode(before));
+                    frag.appendChild(mark);
+                    if (after) frag.appendChild(document.createTextNode(after));
+
+                    tNode.parentNode.replaceChild(frag, tNode);
+                }
+            });
+        }
+
+        function performFaqSearch(query) {
+            let totalFound = 0;
+
+            categorySections.forEach(sec => {
+                let sectionHasMatch = false;
+                const cards = sec.querySelectorAll('.faq-card');
+
+                cards.forEach(card => {
+                    unmarkText(card);
+                    const text = card.textContent.toLowerCase();
+                    if (text.includes(query)) {
+                        card.style.display = '';
+                        card.classList.add('open'); // Auto-expand matched questions
+                        highlightQuery(card.querySelector('.faq-question'), query);
+                        highlightQuery(card.querySelector('.faq-body'), query);
+                        sectionHasMatch = true;
+                        totalFound++;
+                    } else {
+                        card.style.display = 'none';
+                        card.classList.remove('open');
+                    }
+                });
+
+                if (sectionHasMatch) {
+                    sec.style.display = '';
+                } else {
+                    sec.style.display = 'none';
+                }
+            });
+
+            if (totalFound === 0) {
+                emptyResults.style.display = 'block';
+            } else {
+                emptyResults.style.display = 'none';
+            }
+        }
+
+        // Copy Code Helper
+        function copyCode(btn) {
+            const pre = btn.previousElementSibling;
+            if (!pre) return;
+            navigator.clipboard.writeText(pre.innerText).then(() => {
+                showToast('Code copied to clipboard');
+                btn.innerText = 'Copied!';
+                setTimeout(() => btn.innerText = 'Copy', 2000);
+            });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // Floating Top Scroll
+        const fabTop = document.getElementById('fabTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                fabTop.classList.add('visible');
+            } else {
+                fabTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
 </html>
