@@ -1,0 +1,136 @@
+# ====================================================================
+# .gitignore for XAMPP Web Server Root (c:\xampp\htdocs)
+# Prevents exposing secrets, credentials, environment variables,
+# database dumps with sensitive records, and server logs to Git.
+# ====================================================================
+
+# --------------------------------------------------------------------
+# Nested Sub-repositories / Standalone Projects
+# --------------------------------------------------------------------
+waterbillingsystem/
+/waterbillingsystem/
+
+# --------------------------------------------------------------------
+# 1. Environment & Secret Configuration Files
+# --------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+!.env.template
+*.env
+*.local.php
+config.local.php
+local.config.php
+credentials.php
+credentials.json
+secrets.php
+secret*.json
+auth.json
+token.json
+oauth-*.json
+
+# --------------------------------------------------------------------
+# 2. Payment & API Credentials (e.g., M-Pesa, SMS Gateways)
+# --------------------------------------------------------------------
+mpesa_config.php
+sms_config.php
+daraja_keys.php
+africastalking_config.php
+
+# --------------------------------------------------------------------
+# 3. Security Certificates & Private Keys
+# --------------------------------------------------------------------
+*.key
+*.pem
+*.crt
+*.cer
+*.pfx
+*.p12
+
+# --------------------------------------------------------------------
+# 4. Database Dumps & Backups (Prevent Leaking Real User/Tenant Data)
+# --------------------------------------------------------------------
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.bak
+*.backup
+backups/
+backup/
+# Database dumps
+dump.sql
+backup.sql
+*.sql.gz
+*.sql.tar
+
+# Keep repository sample database schemas safe
+!**/database.sql
+!**/waterbillingsystem.sql
+!**/schema.sql
+
+# --------------------------------------------------------------------
+# 5. Logs & Temporary Server Files
+# --------------------------------------------------------------------
+*.log
+logs/
+error_log
+access_log
+php_errors.log
+*.cache
+.cache/
+tmp/
+temp/
+sessions/
+uploads/
+storage/
+
+# XAMPP specific temp files & analytics
+xampp/lang.tmp
+xampp/status.tmp
+webalizer/
+
+# --------------------------------------------------------------------
+# 6. Package Manager Dependencies
+# --------------------------------------------------------------------
+/vendor/
+**/vendor/
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+composer.phar
+
+# --------------------------------------------------------------------
+# 7. Operating System Metadata
+# --------------------------------------------------------------------
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+
+# --------------------------------------------------------------------
+# 8. IDE & Editor Artifacts
+# --------------------------------------------------------------------
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+

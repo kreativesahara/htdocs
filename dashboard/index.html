@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XAMPP for Windows | Dashboard</title>
+    <link rel="icon" type="image/png" href="/dashboard/images/favicon.png">
+
+    <style>
+        :root {
+            --bg-base: #f8fafc;
+            --bg-surface: #ffffff;
+            --bg-subtle: #f1f5f9;
+            --bg-hover: #e2e8f0;
+            --border-color: #e2e8f0;
+            --border-subtle: #cbd5e1;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --primary: #fb6a00; /* XAMPP Orange */
+            --primary-hover: #e05e00;
+            --primary-subtle: #fff7ed;
+            --primary-text: #c2410c;
+            --accent-blue: #4f46e5;
+            --accent-blue-subtle: #e0e7ff;
+            --accent-blue-text: #3730a3;
+            --success-bg: #dcfce7;
+            --success-text: #15803d;
+            --header-h: 70px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        [data-theme="dark"] {
+            --bg-base: #0b0f19;
+            --bg-surface: #131b2e;
+            --bg-subtle: #1e293b;
+            --bg-hover: #2d3b55;
+            --border-color: #243049;
+            --border-subtle: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --primary: #fb923c;
+            --primary-hover: #f97316;
+            --primary-subtle: #431407;
+            --primary-text: #fdba74;
+            --accent-blue: #818cf8;
+            --accent-blue-subtle: #232742;
+            --accent-blue-text: #c7d2fe;
+            --success-bg: #064e3b;
+            --success-text: #a7f3d0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-top: var(--header-h);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Navigation Header */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--header-h);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        [data-theme="dark"] .navbar {
+            background: rgba(19, 27, 46, 0.85);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .navbar-brand img {
+            width: 38px;
+            height: 38px;
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-title span {
+            color: var(--primary);
+        }
+
+        .brand-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 9999px;
+            background: var(--bg-subtle);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.5rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+            background: var(--bg-subtle);
+        }
+
+        .nav-item.active {
+            color: var(--primary-text);
+            background: var(--primary-subtle);
+        }
+
+        .nav-item-highlight {
+            background: var(--primary);
+            color: #ffffff !important;
+            box-shadow: 0 2px 4px rgba(251, 106, 0, 0.25);
+        }
+
+        .nav-item-highlight:hover {
+            background: var(--primary-hover) !important;
+            transform: translateY(-1px);
+        }
+
+        .badge-app {
+            font-size: 0.7rem;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 0.1rem 0.4rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .theme-toggle-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            width: 38px;
+            height: 38px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--text-primary);
+            border-color: var(--primary);
+            transform: rotate(15deg);
+        }
+
+        .theme-toggle-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem 1.5rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* Hero Banner */
+        .hero-section {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #fb6a00, #f59e0b, #4f46e5, #06b6d4);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 320px;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            background: var(--success-bg);
+            color: var(--success-text);
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #16a34a;
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        .hero-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.25rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(251, 106, 0, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(251, 106, 0, 0.35);
+        }
+
+        .btn-outline {
+            background: var(--bg-surface);
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--bg-subtle);
+            border-color: var(--border-subtle);
+            transform: translateY(-2px);
+        }
+
+        .hero-badge-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Section Titles */
+        .section-header {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Featured Application Card */
+        .app-spotlight-card {
+            background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-subtle) 100%);
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            padding: 1.75rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .app-spotlight-left {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: #ffffff;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+            flex-shrink: 0;
+        }
+
+        .app-spotlight-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .app-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: var(--primary-subtle);
+            color: var(--primary-text);
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+        }
+
+        .app-spotlight-desc {
+            color: var(--text-secondary);
+            font-size: 0.925rem;
+            margin-top: 0.25rem;
+        }
+
+        .app-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        /* Grid Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--border-subtle);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon-badge {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: var(--bg-subtle);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.35rem;
+        }
+
+        .card-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        .card-link {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: auto;
+        }
+
+        .card-link:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+
+        /* Stack Info Table */
+        .stack-table-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2.5rem;
+        }
+
+        .stack-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .stack-table th {
+            background: var(--bg-subtle);
+            padding: 0.85rem 1.5rem;
+            text-align: left;
+            font-weight: 700;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stack-table td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .stack-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .service-name {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge-active {
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: var(--success-bg);
+            color: var(--success-text);
+            padding: 0.2rem 0.55rem;
+            border-radius: 9999px;
+        }
+
+        .mono {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 1.5rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Collapsible menu: below this width the nav items no longer fit on one row */
+        .nav-burger {
+            display: none;
+            margin-left: 0;
+        }
+
+        @media (max-width: 1240px) {
+            .navbar {
+                padding: 0 1rem;
+            }
+            .nav-burger {
+                display: flex;
+            }
+            .navbar-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.25rem;
+                padding: 0.75rem 1rem 1rem;
+                background: var(--bg-surface);
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: var(--shadow-lg);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-6px);
+                transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+            }
+            .navbar.is-open .navbar-menu {
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+            }
+            .navbar-menu .nav-item {
+                padding: 0.7rem 0.9rem;
+                font-size: 0.95rem;
+            }
+            .navbar-menu .theme-toggle-btn {
+                margin: 0.25rem 0 0 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 1.75rem 1.25rem;
+            }
+            .hero-title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Modern Fixed Navbar -->
+    <header class="navbar">
+        <a href="/dashboard/index.html" class="navbar-brand">
+            <img src="/dashboard/images/xampp-logo.svg" alt="XAMPP Logo">
+            <div class="brand-title">
+                XAMPP <span>8.2</span>
+                <span class="brand-badge">Windows</span>
+            </div>
+        </a>
+
+        <nav class="navbar-menu" id="navMenu">
+            <a href="/dashboard/index.html" class="nav-item active">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                </svg>
+                Dashboard
+            </a>
+
+            <!-- Water Billing System Link -->
+            <a href="/waterbillingsystem/home.php" class="nav-item nav-item-highlight">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                </svg>
+                Water Billing
+                <span class="badge-app">App</span>
+            </a>
+
+            <a href="/dashboard/performance/" class="nav-item">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+                Performance
+            </a>
+
+            <a href="/dashboard/phpinfo.php" class="nav-item">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                PHPInfo
+            </a>
+
+            <a href="/phpmyadmin/" class="nav-item">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                </svg>
+                phpMyAdmin
+            </a>
+
+            <a href="/dashboard/faq.html" class="nav-item">FAQs</a>
+            <a href="/dashboard/howto.html" class="nav-item">HOW-TO</a>
+
+            <!-- Theme Switcher -->
+            <button type="button" class="theme-toggle-btn" id="themeToggle" title="Toggle Dark/Light Mode">
+                <svg id="themeIconSun" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg id="themeIconMoon" style="display:none;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </nav>
+
+        <button type="button" class="theme-toggle-btn nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/>
+            </svg>
+        </button>
+    </header>
+
+    <main class="main-container">
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="status-pill">
+                        <span class="status-dot"></span>
+                        XAMPP 8.2.12 is Active & Ready
+                    </div>
+                    <h1 class="hero-title">
+                        Welcome to your <span>Local Dev Stack</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Apache, MariaDB, PHP 8.2, and Perl are configured for local development on Windows. Launch your workspace projects and inspect server configuration.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="/waterbillingsystem/home.php" class="btn btn-primary">
+                            <span>Open Water Billing System</span>
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                            </svg>
+                        </a>
+                        <a href="/dashboard/performance/" class="btn btn-outline">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                            <span>Live PC Performance</span>
+                        </a>
+                        <a href="/dashboard/phpinfo.php" class="btn btn-outline">
+                            <span>PHP Configuration</span>
+                        </a>
+                        <a href="/phpmyadmin/" class="btn btn-outline">
+                            <span>phpMyAdmin</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Spotlight -->
+        <div class="section-header">
+            <h2 class="section-title">
+                <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" color="var(--primary)">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                </svg>
+                Workspace Applications
+            </h2>
+            <span class="section-desc">Active projects hosted on this server</span>
+        </div>
+
+        <div class="app-spotlight-card">
+            <div class="app-spotlight-left">
+                <div class="app-icon">💧</div>
+                <div>
+                    <div class="app-spotlight-title">
+                        Water Billing System
+                        <span class="app-tag">Active App</span>
+                    </div>
+                    <p class="app-spotlight-desc">
+                        Tenancy Water Management & Billing Platform for Classic Heights Apartments with dedicated Administrator and Tenant portals, meter tracking, and M-Pesa billing.
+                    </p>
+                </div>
+            </div>
+            <div class="app-actions">
+                <a href="/waterbillingsystem/admin/login.php" class="btn btn-outline">Admin Portal</a>
+                <a href="/waterbillingsystem/user/login.php" class="btn btn-outline">Tenant Portal</a>
+                <a href="/waterbillingsystem/home.php" class="btn btn-primary">Launch Project →</a>
+            </div>
+        </div>
+
+        <!-- Core Stack Services Grid -->
+        <div class="section-header">
+            <h2 class="section-title">Development Tools & Stack</h2>
+            <span class="section-desc">Local server tools and documentation</span>
+        </div>
+
+        <div class="card-grid">
+            <div class="feature-card">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon-badge" style="background:#e0e7ff; color:#4338ca;">PHP</div>
+                        <span class="badge-active">v8.2.12</span>
+                    </div>
+                    <div class="card-title">PHP Environment</div>
+                    <p class="card-text">Modernized diagnostic dashboard with live search for directives, loaded modules, and php.ini location.</p>
+                </div>
+                <a href="/dashboard/phpinfo.php" class="card-link">View PHP Info & Directives &rarr;</a>
+            </div>
+
+            <div class="feature-card">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon-badge" style="background:#fef3c7; color:#b45309;">DB</div>
+                        <span class="badge-active">MariaDB</span>
+                    </div>
+                    <div class="card-title">phpMyAdmin</div>
+                    <p class="card-text">Web-based visual database management tool for MySQL/MariaDB databases, user privileges, and SQL queries.</p>
+                </div>
+                <a href="/phpmyadmin/" class="card-link">Open phpMyAdmin &rarr;</a>
+            </div>
+
+            <div class="feature-card">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon-badge" style="background:#fee2e2; color:#b91c1c;">FAQ</div>
+                        <span class="badge-active">Docs</span>
+                    </div>
+                    <div class="card-title">Frequently Asked Questions</div>
+                    <p class="card-text">Troubleshooting guides, default port assignments, security notices, and component details for XAMPP.</p>
+                </div>
+                <a href="/dashboard/faq.html" class="card-link">Read FAQs &rarr;</a>
+            </div>
+
+            <div class="feature-card">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon-badge" style="background:#dcfce7; color:#15803d;">HOW</div>
+                        <span class="badge-active">Guides</span>
+                    </div>
+                    <div class="card-title">HOW-TO Guides</div>
+                    <p class="card-text">Step-by-step tutorials on Virtual Hosts, SSL configuration, sending email via PHP, and Tomcat setup.</p>
+                </div>
+                <a href="/dashboard/howto.html" class="card-link">Explore HOW-TOs &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Local Stack Details Table -->
+        <div class="section-header">
+            <h2 class="section-title">Server Overview</h2>
+            <span class="section-desc">Host configuration and directory paths</span>
+        </div>
+
+        <div class="stack-table-card">
+            <table class="stack-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Status</th>
+                        <th>Port / Protocol</th>
+                        <th>Path / Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="service-name">
+                                <strong>Apache HTTP Server</strong>
+                            </div>
+                        </td>
+                        <td><span class="badge-active">Online</span></td>
+                        <td class="mono">80 (HTTP), 443 (HTTPS)</td>
+                        <td class="mono">C:\xampp\apache</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="service-name">
+                                <strong>MariaDB / MySQL</strong>
+                            </div>
+                        </td>
+                        <td><span class="badge-active">Online</span></td>
+                        <td class="mono">3306 (TCP)</td>
+                        <td class="mono">C:\xampp\mysql</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="service-name">
+                                <strong>Document Root</strong>
+                            </div>
+                        </td>
+                        <td><span class="badge-active">Configured</span></td>
+                        <td class="mono">Local Filesystem</td>
+                        <td class="mono">C:\xampp\htdocs</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="service-name">
+                                <strong>PHP Configuration</strong>
+                            </div>
+                        </td>
+                        <td><span class="badge-active">Loaded</span></td>
+                        <td class="mono">8.2.12 ZTS 64-bit</td>
+                        <td class="mono">C:\xampp\php\php.ini</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                &copy; Apache Friends &bull; XAMPP for Windows Development Environment
+            </div>
+            <div class="footer-links">
+                <a href="/waterbillingsystem/home.php">Water Billing System</a>
+                <a href="/dashboard/phpinfo.php">PHP Info</a>
+                <a href="/phpmyadmin/">phpMyAdmin</a>
+                <a href="/dashboard/faq.html">FAQs</a>
+                <a href="https://community.apachefriends.org" target="_blank" rel="noopener">Community Forums</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Synchronized Theme Toggle with phpinfo
+        const htmlEl = document.documentElement;
+        const themeToggle = document.getElementById('themeToggle');
+        const sunIcon = document.getElementById('themeIconSun');
+        const moonIcon = document.getElementById('themeIconMoon');
+
+        function setTheme(theme) {
+            htmlEl.setAttribute('data-theme', theme);
+            localStorage.setItem('phpinfo_theme', theme);
+            if (theme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+        }
+
+        const savedTheme = localStorage.getItem('phpinfo_theme') || 
+            (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const current = htmlEl.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+
+        // Collapsible navigation menu (narrow screens)
+        const navbar = document.querySelector('.navbar');
+        const navBurger = document.getElementById('navBurger');
+        function setMenu(open) {
+            navbar.classList.toggle('is-open', open);
+            navBurger.setAttribute('aria-expanded', open ? 'true' : 'false');
+            navBurger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        }
+        navBurger.addEventListener('click', () => setMenu(!navbar.classList.contains('is-open')));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+        document.addEventListener('click', (e) => { if (!navbar.contains(e.target)) setMenu(false); });
+    </script>
+</body>
+</html>
